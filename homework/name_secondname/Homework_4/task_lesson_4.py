@@ -1,5 +1,5 @@
 var1 = 'qwq'
-var2 = 'qwq'
+var2 = 'qwddq2'
 
 my_dict = {
     'tuple': (1, 3, 6, 7, None, 'teccczxt', False, 2.42),
