@@ -38,5 +38,4 @@ subjects_list = ', '.join(subjects)
 
 print(f"Students {students_list} study these subjects: {subjects_list}")
 
-# Финальный сепаратор
-print("=" * 35, "\n")
+
