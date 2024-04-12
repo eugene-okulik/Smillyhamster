@@ -1,15 +1,14 @@
 # Задание №1
 # Напишите программу, которая добавляет ‘ing’ к словам (к каждому слову) в тексте
 
-string = ('Etiam tincidunt neque erat, quis molestie enim imperdiet vel. '
-        'Integer urna nisl, facilisis vitae semper at, dignissim vitae libero')
+strings = ('Etiam tincidunt neque erat, quis molestie enim imperdiet vel. '
+            'Integer urna nisl, facilisis vitae semper at, dignissim vitae libero'
+)
 
 # Делим строку на список подстрок, разделитель - пробел
-split_string = string.split()
-
+split_string = strings.split()
 
 new_string = []
-print(type(new_string))
 
 # Проверяем подстроки на наличие точки и запятой, в зависимости от этого
 # определяем место для вставки
