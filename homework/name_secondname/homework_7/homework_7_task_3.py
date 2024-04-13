@@ -9,7 +9,7 @@ out4 = "результат: 2"
 
 # поместил решение ДЗ  №5 в функцию
 def edit_string(some_string):
-    out1_num = int(some_string[some_string.index(":") + 1 :].strip())
+    out1_num = int(some_string[some_string.index(":") + 1:].strip())
     print(out1_num + 10)
 
 edit_string(out1)
