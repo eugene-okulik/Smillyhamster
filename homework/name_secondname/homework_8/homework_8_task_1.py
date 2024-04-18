@@ -1,18 +1,20 @@
-# Задание 1
-# Напишите программу. Есть две переменные, salary и bonus.
-# Salary - int, bonus - bool.
-# Спросите у пользователя salary. А bonus пусть назначается рандомом.
-# Если bonus - true, то к salary должен быть добавлен рандомный бонус.
+# Задание 2
+# Напишите функцию-генератор, которая генерирует список чисел фибоначчи
+# Распечатайте из этого списка пятое число, двухсотое число, тысячное число, стотысячное число
 
-import random
 
-salary = int(input("Введите ЗП: "))
+# Сама функция-генератор, теперь бесконечная
+def fib(limit=100001):
+    a, b = 0, 1
+    count = 1
+    while True:
+        yield b
+        a, b = b, a + b
+        count += 1
 
-bonus = random.choice([True, False])
 
-if bonus:
-    bonus_size = random.randint(1, 50000)
-    salary += bonus_size
-    print(f"Вам положен бонус в размере {bonus_size}. Всего к выплате {salary}")
-else:
-    print("Соррян, в этот раз без бонусов...")
+for count, num in enumerate(fib(), start=1):
+    if count in (5, 200, 1000, 100000):
+        print(num)
+    if count > 100000:
+        break
