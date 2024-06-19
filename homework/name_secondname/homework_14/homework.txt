@@ -1,0 +1,70 @@
+/* Создайте студента (student) */
+INSERT INTO students(name,second_name, group_id) VALUES('Alko', 'Tester', 1);
+
+SELECT id FROM students WHERE name = 'Alko';
+/* 1369 */
+
+/* Создайте несколько книг (books) и укажите, что ваш созданный студент взял их */
+INSERT INTO books(title,taken_by_student_id) VALUES('Python VS Beer', 1369);
+
+INSERT INTO books(title,taken_by_student_id) VALUES('Testing with Tequila and pytest', 1369);
+
+/* Создайте группу (group) и определите своего студента туда */
+INSERT INTO `groups`(title, start_date, end_date) VALUES('Alcoholical testing course group', 'feb 2022', 'jun 2023');
+
+SELECT id FROM  `groups` WHERE title = 'Alcoholical testing course group';
+/* 1294 */
+
+UPDATE students SET group_id = 1294 WHERE students.name = 'Alko';
+
+/* Создайте несколько учебных предметов (subjects) */
+INSERT INTO subjets(title) VALUES ('Programming in Bar');
+SELECT id FROM subjets WHERE title = 'Programming in Bar';
+/* 1807 */
+INSERT INTO subjets(title) VALUES ('DATABASE with Gin and Tonik');
+SELECT id FROM subjets WHERE title = 'DATABASE with Gin and Tonik';
+/* 1808 */
+
+/* Создайте по два занятия для каждого предмета (lessons) */
+INSERT INTO lessons(title, subject_id) VALUES ('pytest_1', 1807);
+INSERT INTO lessons(title, subject_id) VALUES ('pytest_2', 1807);
+INSERT INTO lessons(title, subject_id) VALUES ('Testing without drinks', 1808);
+INSERT INTO lessons(title, subject_id) VALUES ('Testing without brain', 1808);
+
+SELECT id FROM lessons WHERE title = 'pytest_1' AND subject_id = 1807;
+/* 4139 */
+SELECT id FROM lessons WHERE title = 'pytest_2' AND subject_id = 1807;
+/* 4140 */
+SELECT id FROM lessons WHERE title = 'Testing without drinks' AND subject_id = 1808;
+/* 4141, 4143 */
+SELECT id FROM lessons WHERE title = 'db2' AND subject_id = 427;
+/* 4142 */
+
+
+/* Поставьте своему студенту оценки (marks) для всех созданных вами занятий */
+INSERT INTO marks(value, lesson_id, student_id) VALUES(10, 4139, 1369);
+INSERT INTO marks(value, lesson_id, student_id) VALUES(10, 4140, 1369);
+INSERT INTO marks(value, lesson_id, student_id) VALUES(8, 4143, 1369);
+INSERT INTO marks(value, lesson_id, student_id) VALUES(3, 4142, 1369);
+
+/* Получите информацию из базы данных: Все оценки студента */
+SELECT * FROM marks WHERE student_id = 1369;
+
+/* Получите информацию из базы данных: Все книги, которые находятся у студента */
+SELECT title FROM books
+WHERE taken_by_student_id = 1369;
+
+/* Для вашего студента выведите всё, что о нем есть в базе: группа, книги, оценки с названиями занятий и предметов (всё одним запросом с использованием Join)*/
+SELECT students.name AS student_name,
+	   `groups`.title AS group_name,
+	   books.title AS book,
+	   marks.value AS mark,
+	   subjets.title AS subject,
+	   lessons.title AS lesson
+FROM students
+JOIN `groups` ON `groups`.id = students.group_id
+JOIN books ON books.taken_by_student_id = students.id
+JOIN marks ON marks.student_id = students.id
+JOIN lessons ON lessons.id = marks.lesson_id
+JOIN subjets ON subjets.id = lessons.subject_id
+WHERE students.id = 1369 AND `groups`.id = 1294;
