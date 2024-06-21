@@ -101,6 +101,8 @@ JOIN subjets ON subjets.id = lessons.subject_id
 WHERE students.id = {student_id} AND `groups`.id = {group_id};
 """)
 
+data_all_info = cursor.fetchall()
+
 for data in data_all_info:
     print(data)
 
